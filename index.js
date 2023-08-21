@@ -4,7 +4,20 @@ const c = canvas.getContext('2d')
 canvas.width  = 64 * 16 // 1024
 canvas.height = 64 * 9  // 576
 
-const player = new Player()
+const parseCollisions = collisionLevel.parse2D()
+const collisionBlocks = parseCollisions.createObjectsFrom2D()
+
+const Background = new Sprite({
+    position: {
+        x: 0,
+        y: 0,
+    },
+    imageSrc: './img/testmap.png'
+})
+
+const player = new Player({
+    collisionBlocks,
+})
 
 const keys = {
     w: {
@@ -20,9 +33,11 @@ const keys = {
 
 function animate() {
     window.requestAnimationFrame(animate)
-    c.fillStyle = 'white'
-    c.fillRect(0,0,canvas.width, canvas.height)
-
+    
+    Background.draw()
+    collisionBlocks.forEach((collisionBlock) => {
+        collisionBlock.draw()
+    })
     player.velocity.x = 0
     if (keys.d.pressed) {
         player.velocity.x = 5
