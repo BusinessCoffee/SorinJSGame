@@ -38,10 +38,7 @@ function animate() {
     collisionBlocks.forEach((collisionBlock) => {
         collisionBlock.draw()
     })
-    player.velocity.x = player.velocity.x * .07
-    if (keys.d.pressed) {
-        player.velocity.x = 2.75
-    } else if (keys.a.pressed) player.velocity.x = -2.75
+
     player.draw()
     player.update()
 }

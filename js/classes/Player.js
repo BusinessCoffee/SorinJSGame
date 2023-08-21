@@ -17,16 +17,56 @@ class Player {
             bottom: this.position.y + this.height
         }
         this.gravity = .3
+        this.friction= .7
+
+        this.jumpStrength = -7.8
+        this.movementSpeed = 2.75
+        this.jumpLimit = 2
+        this.jumpCount = 0
+        this.wasJumping = false
 
         this.collisionBlocks = collisionBlocks
     }
 
     draw() {
-        c.fillStyle = 'red'
+        c.fillStyle = 'blue'
         c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
+    jumpCheck(){
+        if (keys.w.pressed){
+            if (player.velocity.y === 0){
+                player.jump() 
+                player.jumpCount=1
+                player.wasJumping = false
+            } 
+            else if (player.jumpCount < player.jumpLimit){
+                if(player.wasJumping == true){
+                    player.wasJumping = false
+                    player.jump() 
+                    player.jumpCount++
+                }
+            }
+        }
+        else    player.wasJumping = true
+        
+    }
+    jump(){
+        player.velocity.y = player.jumpStrength
+    }
+
+    moveLeft(){
+        player.velocity.x = player.movementSpeed 
+    }
+
+    moveRight(){
+        player.velocity.x = -player.movementSpeed 
     }
 
     update() {
+        player.velocity.x = player.velocity.x * player.friction
+        player.jumpCheck()
+        if (keys.d.pressed)   player.moveLeft()
+        else if (keys.a.pressed) player.moveRight()
         this.position.x += this.velocity.x
         // Check for horizontal collisions
         for (let i = 0; i < this.collisionBlocks.length; i++) {
