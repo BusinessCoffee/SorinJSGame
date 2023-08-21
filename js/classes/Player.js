@@ -16,7 +16,7 @@ class Player {
         this.sides = {
             bottom: this.position.y + this.height
         }
-        this.gravity = 1
+        this.gravity = .3
 
         this.collisionBlocks = collisionBlocks
     }
@@ -37,17 +37,19 @@ class Player {
                 this.position.y <= collisionBlock.position.y + collisionBlock.height) 
                 {   
                     // collision on x axis going to the left
-                    if (this.velocity.x < -1) {
+                    if (this.velocity.x < 0) {
                         this.position.x = collisionBlock.position.x + collisionBlock.width + 0.01
                         break
                     }
 
-                    if (this.velocity.x > 1) {
+                    if (this.velocity.x > 0) {
                         this.position.x = collisionBlock.position.x - this.width - 0.01
                         break
                     }
                 }
         }
+
+        this.velocity.y += this.gravity
         this.position.y += this.velocity.y
         this.sides.bottom = this.position.y + this.height
 
@@ -58,13 +60,15 @@ class Player {
                 this.position.y + this.height >= collisionBlock.position.y && 
                 this.position.y <= collisionBlock.position.y + collisionBlock.height) 
                 {   
-                    // collision on x axis going to the left
-                    if (this.velocity.y < -1) {
+
+                    if (this.velocity.y < 0) {
+                        this.velocity.y = 0
                         this.position.y = collisionBlock.position.y + collisionBlock.height + 0.01
                         break
                     }
 
-                    if (this.velocity.y > 1) {
+                    if (this.velocity.y > 0) {
+                        this.velocity.y = 0
                         this.position.y = collisionBlock.position.y - this.height - 0.01
                         break
                     }
@@ -74,7 +78,7 @@ class Player {
         
         // above bottom of canvas
         if (this.sides.bottom + this.velocity.y < canvas.height) {
-                this.velocity.y += this.gravity
+               
 
             } else this.velocity.y = 0
     }
