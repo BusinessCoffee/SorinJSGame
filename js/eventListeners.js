@@ -2,8 +2,8 @@ window.addEventListener('keydown', (event) => {
     switch (event.key) {
     case 'w':
         // Fix infinite jump : debounce or jump count
-        if (player.velocity.y === 0) player.velocity.y = -10
-        player.velocity.y = -10
+        if (player.velocity.y === 0)
+        player.velocity.y = -7.8
         break
     case 'a':
         keys.a.pressed = true

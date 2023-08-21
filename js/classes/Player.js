@@ -60,7 +60,6 @@ class Player {
                 this.position.y + this.height >= collisionBlock.position.y && 
                 this.position.y <= collisionBlock.position.y + collisionBlock.height) 
                 {   
-
                     if (this.velocity.y < 0) {
                         this.velocity.y = 0
                         this.position.y = collisionBlock.position.y + collisionBlock.height + 0.01
