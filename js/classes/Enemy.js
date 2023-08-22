@@ -5,7 +5,7 @@ class Enemy {
         this.width = blockSize
         this.height = blockSize
         this.walkCycleLength =  32*3
-        this.movementSpeed = 1
+        this.movementSpeed = 7
         this.walkCycle = 0
         this.moveL = true
 
@@ -21,11 +21,11 @@ class Enemy {
 
     update(){
         if (this.moveL){
-            this.walkCycle++
+            this.walkCycle+=this.movementSpeed
             this.moveLeft()
         }
         else{
-            this.walkCycle--
+            this.walkCycle-=this.movementSpeed
             this.moveRight()
         }
         if(this.walkCycle>=this.walkCycleLength){
