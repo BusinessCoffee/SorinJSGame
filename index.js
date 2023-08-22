@@ -6,6 +6,8 @@ canvas.height = 64 * 9  // 576
 
 const parseCollisions = collisionLevel.parse2D()
 const collisionBlocks = parseCollisions.createObjectsFrom2D()
+const parseEnemies = enemyTest.parse2D()
+const Enemies = parseEnemies.createEnemiesFrom2D()
 
 const Background = new Sprite({
     position: {
@@ -37,6 +39,10 @@ function animate() {
     Background.draw()
     collisionBlocks.forEach((collisionBlock) => {
         collisionBlock.draw()
+    })
+    Enemies.forEach((Enemy) => {
+        Enemy.update()
+        Enemy.draw()
     })
 
     player.draw()

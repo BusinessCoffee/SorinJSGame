@@ -23,3 +23,19 @@ Array.prototype.createObjectsFrom2D = function () {
     })
     return objects
 }
+Array.prototype.createEnemiesFrom2D = function () {
+    const Enemies = []
+    this.forEach((row, y) => {
+        row.forEach((Symbol, x) => {
+            if (Symbol === 118) { 
+                Enemies.push(new Enemy({
+                    position: {
+                        x: x * 32,
+                        y: y * 32,
+                    },
+                }))
+            }
+        })
+    })
+    return Enemies
+}

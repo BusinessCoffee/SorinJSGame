@@ -22,7 +22,7 @@ class Player {
         this.jumpStrength = -7.8
         this.movementSpeed = 2.75
         this.jumpLimit = 2
-        this.ceilingClimbing = false
+        this.ceilingClimbing = true
 
         this.jumpCount = 0
         this.wasJumping = false
