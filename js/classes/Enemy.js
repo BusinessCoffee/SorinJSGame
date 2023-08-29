@@ -5,7 +5,7 @@ class Enemy {
         this.width = blockSize
         this.height = blockSize
         this.walkCycleLength =  32*3
-        this.movementSpeed = 1
+        this.movementSpeed = 2.25
         this.walkCycle = 0
         this.moveL = true
 
