@@ -1,7 +1,8 @@
-class Player {
+class Player extends Sprite {
     constructor({
-        collisionBlocks = []
+        collisionBlocks = [], imageSrc, frameRate, animations
     }) {
+        super({imageSrc, frameRate, animations})
         this.position = {
             x: 50,
             y: 100,
@@ -11,8 +12,6 @@ class Player {
             x:0,
             y:0,
         }
-        this.width = 25
-        this.height = 25
         this.sides = {
             bottom: this.position.y + this.height
         }
@@ -20,9 +19,9 @@ class Player {
         this.friction= .7
 
         this.jumpStrength = -7.8
-        this.movementSpeed = 2.75
+        this.movementSpeed = 1
         this.jumpLimit = 2
-        this.ceilingClimbing = true
+        this.ceilingClimbing = false
 
         this.jumpCount = 0
         this.wasJumping = false
@@ -30,10 +29,6 @@ class Player {
         this.collisionBlocks = collisionBlocks
     }
 
-    draw() {
-        c.fillStyle = 'blue'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
-    }
     jumpCheck(){
         if (keys.w.pressed){
             if (player.velocity.y === 0){
@@ -49,7 +44,7 @@ class Player {
                 }
             }
         }
-        else    player.wasJumping = true
+        else   player.wasJumping = true
         
     }
     jump(){
@@ -63,66 +58,120 @@ class Player {
     moveRight(){
         player.velocity.x = -player.movementSpeed 
     }
-
     update() {
-        player.velocity.x = player.velocity.x * player.friction
-        player.jumpCheck()
-        if (keys.d.pressed)   player.moveLeft()
-        else if (keys.a.pressed) player.moveRight()
-        this.position.x += this.velocity.x
+        this.movment()
+        this.updateHitbox()
+        this.checkForHorizontalCollision()
+        this.applyGravity()
+        this.updateHitbox()
+        // c.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.width, this.hitbox.height)
+        this.checkForVerticalCollision()
+        this.updateHitbox()
+
+        // above bottom of canvas
+        if (this.sides.bottom + this.velocity.y < canvas.height) {
+            } else this.velocity.y = 0
+    }
+
+    switchSprite(name) {
+        if (this.image === this.animations[name].image) return
+        this.currentFrame = 0
+        this.image = this.animations[name].image
+        this.frameRate = this.animations[name].frameRate
+        this.frameBuffer = this.animations[name].frameBuffer
+    }
+
+    movment() {
+        // this is the blue box
+       // c.fillStyle = 'rgba(0, 0, 255, 0.5)'
+       // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+       player.velocity.x = player.velocity.x * player.friction
+       player.jumpCheck()
+       if (keys.d.pressed)  {
+        player.moveLeft() 
+        player.switchSprite('runRight')
+        player.lastDirection = 'right'
+       }
+       else if (keys.a.pressed) {
+        player.moveRight()
+        player.switchSprite('runLeft')
+        player.lastDirection = 'left'
+       }
+       else {
+        if (player.lastDirection === 'left') {
+            player.switchSprite('idleLeft')
+        } else player.switchSprite('idleRight')
+        
+       }
+    }
+
+    updateHitbox() {
+        this.hitbox = {
+            position: {
+                x: this.position.x + 20,
+                y: this.position.y - 1
+            },
+            width: 20,
+            height: 65
+        }
+    }
+
+    checkForHorizontalCollision() {
+       this.position.x += this.velocity.x
         // Check for horizontal collisions
         for (let i = 0; i < this.collisionBlocks.length; i++) {
             const collisionBlock = this.collisionBlocks[i]
-            if (this.position.x <= collisionBlock.position.x + collisionBlock.width &&
-                this.position.x + this.width >= collisionBlock.position.x && 
-                this.position.y + this.height >= collisionBlock.position.y && 
-                this.position.y <= collisionBlock.position.y + collisionBlock.height) 
+            if (this.hitbox.position.x <= collisionBlock.position.x + collisionBlock.width &&
+                this.hitbox.position.x + this.hitbox.width >= collisionBlock.position.x && 
+                this.hitbox.position.y + this.hitbox.height >= collisionBlock.position.y && 
+                this.hitbox.position.y <= collisionBlock.position.y + collisionBlock.height) 
                 {   
                     // collision on x axis going to the left
                     if (this.velocity.x < 0) {
-                        this.position.x = collisionBlock.position.x + collisionBlock.width + 0.01
+                        const offest = this.hitbox.position.x - this.position.x
+                        this.position.x = collisionBlock.position.x + collisionBlock.width - offest + 0.01
                         break
                     }
 
                     if (this.velocity.x > 0) {
-                        this.position.x = collisionBlock.position.x - this.width - 0.01
+                        const offest = this.hitbox.position.x - this.position.x + this.hitbox.width
+                        this.position.x = collisionBlock.position.x - offest - 0.01
                         break
                     }
                 }
         }
+    }
 
+    applyGravity()  {
         this.velocity.y += this.gravity
         this.position.y += this.velocity.y
         this.sides.bottom = this.position.y + this.height
+    }
 
+    checkForVerticalCollision() {
         for (let i = 0; i < this.collisionBlocks.length; i++) {
             const collisionBlock = this.collisionBlocks[i]
-            if (this.position.x <= collisionBlock.position.x + collisionBlock.width &&
-                this.position.x + this.width >= collisionBlock.position.x && 
-                this.position.y + this.height >= collisionBlock.position.y && 
-                this.position.y <= collisionBlock.position.y + collisionBlock.height) 
+            if (this.hitbox.position.x <= collisionBlock.position.x + collisionBlock.width &&
+                this.hitbox.position.x + this.hitbox.width >= collisionBlock.position.x && 
+                this.hitbox.position.y + this.hitbox.height >= collisionBlock.position.y && 
+                this.hitbox.position.y <= collisionBlock.position.y + collisionBlock.height) 
                 {   
                     if (this.velocity.y < 0) {
                         if (player.ceilingClimbing)this.velocity.y = 0// if set to 0 allows player to stick to the ceiling 
                         else this.velocity.y = 1 
-                        this.position.y = collisionBlock.position.y + collisionBlock.height + 0.01
+                        const offest = this.hitbox.position.y - this.position.y
+                        this.position.y = collisionBlock.position.y + collisionBlock.height - offest + 0.01
                         break
                     }
 
                     if (this.velocity.y > 0) {
                         this.velocity.y = 0// can make the world bouncy by setting to -10
                         player.jumpCount=1
-                        this.position.y = collisionBlock.position.y - this.height - 0.01
+                        const offest = this.hitbox.position.y - this.position.y + this.hitbox.height
+                        this.position.y = collisionBlock.position.y - offest - 0.01
                         break
                     }
                 }
         }
-
-        
-        // above bottom of canvas
-        if (this.sides.bottom + this.velocity.y < canvas.height) {
-               
-
-            } else this.velocity.y = 0
     }
 }
