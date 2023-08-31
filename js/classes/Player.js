@@ -1,11 +1,15 @@
+let debounce = true
+let starterPositionX = 50
+let starterPositionY = 100
+
 class Player extends Sprite {
     constructor({
-        collisionBlocks = [], imageSrc, frameRate, animations
+        collisionBlocks = [], enemies = [], imageSrc, frameRate, animations
     }) {
         super({ imageSrc, frameRate, animations })
         this.position = {
-            x: 50,
-            y: 100,
+            x: starterPositionX,
+            y: starterPositionY,
         }
 
         this.velocity = {
@@ -26,7 +30,9 @@ class Player extends Sprite {
         this.jumpCount = 0
         this.wasJumping = false
 
+        this.health = 100
         this.collisionBlocks = collisionBlocks
+        this.enemies = enemies
     }
 
     jumpCheck() {
@@ -66,6 +72,7 @@ class Player extends Sprite {
         this.updateHitbox()
        // c.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.width, this.hitbox.height)
         this.checkForVerticalCollision()
+        this.checkForEnemy()
 
         // above bottom of canvas
         if (this.sides.bottom + this.velocity.y < canvas.height) {
@@ -138,6 +145,33 @@ class Player extends Sprite {
                     this.position.x = collisionBlock.position.x - offest - .01
                     this.velocity.x = -2
                     break
+                }
+            }
+        }
+    }
+
+
+    checkForEnemy() {
+        for (let i = 0; i < this.enemies.length; i++) {
+            const enemies = this.enemies[i]
+            if (this.hitbox.position.x <= enemies.position.x + enemies.width &&
+                this.hitbox.position.x + this.hitbox.width >= enemies.position.x &&
+                this.hitbox.position.y + this.hitbox.height >= enemies.position.y &&
+                this.hitbox.position.y <= enemies.position.y + enemies.height) {
+                // collision on x axis going to the left 
+                if (debounce) {
+                    debounce = false
+                    new playAudio("swhurt")
+                    console.log(this.health -= 10)
+                    if (this.health <= 0) {
+                        new playAudio("swdeath")
+                        player.position.x = starterPositionX
+                        player.position.y = starterPositionY
+                        player.health = 100
+                    }
+                    function rest() {debounce = true; return true}
+                    setTimeout(rest, 500)
+                    debounce = false
                 }
             }
         }
