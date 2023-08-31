@@ -7,7 +7,7 @@ canvas.height = 64 * 9  // 576
 const parseCollisions = collisionLevel.parse2D()
 const collisionBlocks = parseCollisions.createObjectsFrom2D()
 const parseEnemies = enemyTest.parse2D()
-const Enemies = parseEnemies.createEnemiesFrom2D()
+const enemies = parseEnemies.createEnemiesFrom2D()
 
 const Background = new Sprite({
     position: {
@@ -19,6 +19,7 @@ const Background = new Sprite({
 
 const player = new Player({
     collisionBlocks,
+    enemies,
     imageSrc: './img/player/MarkIdleRight.png',
     frameRate: 4,
     animations: {
@@ -68,7 +69,7 @@ function animate() {
     collisionBlocks.forEach((collisionBlock) => {
         collisionBlock.draw()
     })
-    Enemies.forEach((Enemy) => {
+    enemies.forEach((Enemy) => {
         Enemy.update()
         Enemy.draw()
     })
