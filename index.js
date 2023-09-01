@@ -60,6 +60,9 @@ const keys = {
     d: {
         pressed: false,
     },
+    r: {
+        pressed: false
+    }
 }
 
 function animate() {
