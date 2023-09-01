@@ -10,6 +10,9 @@ window.addEventListener('keydown', (event) => {
     case 'd':
         keys.d.pressed = true
         break
+    case 'r':
+        keys.r.pressed = true
+        break
     }
 
 })
@@ -24,6 +27,9 @@ window.addEventListener('keyup', (event) => {
         break
     case 'd':
         keys.d.pressed = false
+        break
+    case 'r':
+        keys.r.pressed = false
         break
     }
 

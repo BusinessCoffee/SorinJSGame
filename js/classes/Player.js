@@ -64,6 +64,7 @@ class Player extends Sprite {
     moveRight() {
         player.velocity.x = player.movementSpeed
     }
+    
     update() {
         this.movment()
         this.updateHitbox()
@@ -110,6 +111,11 @@ class Player extends Sprite {
             } else {
                 player.switchSprite('idleRight')
             }
+        }
+        if (keys.r.pressed) {
+            player.health = 100
+            player.position.x = starterPositionX
+            player.position.y = starterPositionY
         }
     }
 
