@@ -141,15 +141,15 @@ class Player extends Sprite {
                 // collision on x axis going to the left
                 if (this.velocity.x < 0) {
                     const offest = this.hitbox.position.x - this.position.x
-                    this.position.x = collisionBlock.position.x + collisionBlock.width - offest + .01
-                    this.velocity.x = 2
+                    this.position.x = collisionBlock.position.x + collisionBlock.width - offest + 1
+                    // this.velocity.x = 2
                     break
                 }
 
                 if (this.velocity.x > 0) {
                     const offest = this.hitbox.position.x - this.position.x + this.hitbox.width
-                    this.position.x = collisionBlock.position.x - offest - .01
-                    this.velocity.x = -2
+                    this.position.x = collisionBlock.position.x - offest - 1
+                    // this.velocity.x = -2
                     break
                 }
             }
