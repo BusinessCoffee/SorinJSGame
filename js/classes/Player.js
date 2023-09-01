@@ -67,8 +67,6 @@ class Player extends Sprite {
     
     update() {
         this.movment()
-        this.updateHitbox()
-        this.checkForHorizontalCollision()
         this.applyGravity()
         this.updateHitbox()
         // c.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.width, this.hitbox.height)
@@ -94,6 +92,9 @@ class Player extends Sprite {
        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
         this.position.x += this.velocity.x
         player.velocity.x = player.velocity.x * player.friction
+        this.updateHitbox()
+        this.checkForHorizontalCollision()
+        this.updateHitbox() 
         player.jumpCheck()
         if (keys.d.pressed) {
                 player.moveRight()
