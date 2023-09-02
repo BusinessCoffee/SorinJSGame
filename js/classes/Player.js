@@ -72,10 +72,6 @@ class Player extends Sprite {
         // c.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.width, this.hitbox.height)
         this.checkForVerticalCollision()
         this.checkForEnemy()
-
-        // above bottom of canvas
-        if (this.sides.bottom + this.velocity.y < canvas.height) {
-        } else this.velocity.y = 0
     }
 
     switchSprite(name) {

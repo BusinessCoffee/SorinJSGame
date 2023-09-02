@@ -9,6 +9,7 @@ Array.prototype.parse2D = function () {
 
 Array.prototype.createObjectsFrom2D = function () {
     const objects = []
+    const Enemies = []
     this.forEach((row, y) => {
         row.forEach((Symbol, x) => {
             if (Symbol === 1) { // 1 = collision box
@@ -19,23 +20,31 @@ Array.prototype.createObjectsFrom2D = function () {
                     },
                 }))
             }
-        })
-    })
-    return objects
-}
-Array.prototype.createEnemiesFrom2D = function () {
-    const Enemies = []
-    this.forEach((row, y) => {
-        row.forEach((Symbol, x) => {
-            if (Symbol === 118) { 
-                Enemies.push(new Enemy({
+            if (Symbol === 2) { 
+                Enemies.push(new Crawler ({
                     position: {
                         x: x * 32,
                         y: y * 32,
                     },
+                    imageSrc: './img/enemies/GoombaRight.png',
+                    frameRate: 5,
+                    animations: {
+                        Right: {
+                            frameRate: 5,
+                            frameBuffer: 10,
+                            loop: true,
+                            imageSrc: './img/enemies/GoombaRight.png'
+                        },
+                        Left: {
+                            frameRate: 5,
+                            frameBuffer: 10,
+                            loop: true,
+                            imageSrc: './img/enemies/GoombaLeft.png'
+                        },
+                    }
                 }))
             }
         })
     })
-    return Enemies
+    return [objects, Enemies]
 }
