@@ -36,8 +36,21 @@ class Player extends Sprite {
         this.enemies = enemies
 
         this.attackRange = 50
+        this.parseCollisions = []
     }
+    updateLevel(){
+        switch (level){
+            case 1:
+                this.parseCollisions = collisionLevel.parse2D()
+                player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()
+                break
+            case 2:
+                this.parseCollisions = collisionLevel2.parse2D()
+                player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()
+                break
 
+        }
+    }
     jumpCheck() {
         if (keys.w.pressed) {
             if (player.velocity.y === 0) {
@@ -58,6 +71,8 @@ class Player extends Sprite {
     }
 
     jump() {
+        level++            
+        this.updateLevel()
         player.velocity.y = player.jumpStrength
     }
 
@@ -70,6 +85,7 @@ class Player extends Sprite {
     }
 
     update() {
+        // this.updateLevel()
         this.movment()
         this.applyGravity()
         this.updateHitbox()
@@ -123,6 +139,9 @@ class Player extends Sprite {
             player.health = 100
             player.position.x = starterPositionX
             player.position.y = starterPositionY
+            // level++            
+            // this.updateLevel()
+            console.log(level)
         }
     }
 
