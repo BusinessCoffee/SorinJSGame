@@ -3,9 +3,9 @@ const c = canvas.getContext('2d')
 
 canvas.width = 64 * 16 // 1024
 canvas.height = 64 * 9  // 576
-
-const parseCollisions = collisionLevel.parse2D()
-const [collisionBlocks, enemies] = parseCollisions.createObjectsFrom2D()
+var level = 1
+var parseCollisions = collisionLevel.parse2D()
+var [collisionBlocks, enemies] = parseCollisions.createObjectsFrom2D()
 
 const Background = new Sprite({
     position: {
@@ -15,7 +15,7 @@ const Background = new Sprite({
     imageSrc: './img/maps/Level1.png'
 })
 
-const player = new Player({
+var player = new Player({
     collisionBlocks,
     enemies,
     imageSrc: './img/player/MarkIdleRight.png',
