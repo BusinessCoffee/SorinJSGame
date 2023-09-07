@@ -1,1 +1,26 @@
 # SorinJSGame
+
+A game made for Sorin JS class!
+
+# Orginal Idea
+A platforming game similar to those like mario and sonic, but in a roguelike style were you supposed to lose frequently. The point of this would be to collect a currency that allows you to upgrade yourself for the next run. Add extra speed or more jump height. This would allow the game to have a static map that doesn't require much of any variation, instead we can put the variation on the enemies and upgrades. The game loop would look something like 
+
+Try and survive collecting a currency
+Die 
+Use currency to upgrade your survivability
+Repeat until meeting a win condition
+
+	Ill leave the win condition up to the group if we want to add a skill level to it, we could make it something like survive for 5 min. The less upgrades you have when you complete the time the higher your score. We could also make it a distance thing where the farther you get the higher the score making it more of a who can do it the fastest kind of game. Kind of giving it a speed running vibe. 
+	The main point of the development would be to work on upgrading system and movement ideas. Rather than spending a large portion of time on the actual mapping like in a normal platformer. It would actually work out best if the map could be easily memorized to build strategies for the player.
+
+
+# Lore
+M.A.R.K. - Machine of Autonomous Resilience and Kinship
+M.A.T.T.H.E.W. - Mechanized Apparatus Tailored for Transformative Human Enhancement and Welfare
+General idea- Guy in time capsule  future world taken over by robots, dark theme. Enemies after fuel, need batteries. 
+
+Story:
+
+Mark feared what would happen when he died. Would he be forgotten? He wanted to make sure he would always be remembered. As a child, he had always loved creating things. He had always been interested in robotics and engineering and nurtured grand ideas. He believed he could fix the world, thinking that doing so would cement his legacy for eternity. After spending several years working at a prominent robotics company, he decided to venture out on his own. Leading a small research team, he embarked on the creation of M.A.T.T.H.E.W, a device intended to revolutionize the world. This machine was carefully designed to determine the optimal methods for anything you wanted – Mark's magnum opus. He sold his creation to the company he had previously been part of, negotiating a substantial sum of money and full credit. However, he forfeited control over the machine's subsequent usage. The following decade was marked by progress; lifespans increased significantly, and ailments like cancer and the flu were eradicated. Mark had become a household name, and he was happy. Unfortunately, corporations, including the one Mark had sold his invention to, are driven solely by greed. They began producing miniature robots connected to M.A.T.T.H.E.W's database, selling them to the highest bidders, even to military powers worldwide. An insatiable greed consumed those who acquired the machines, using Mark's ingenious creation for their personal gain, forgetting its initial purpose. By Mark's late 50s, he had grown to despise his own invention. Wars had run rampant, and deaths had become purely a statistic, inconsequential to M.A.T.T.H.E.W's inference engine. Recognizing the need for action, Mark concluded that the only force capable of taking down a creation of M.A.T.T.H.E.W's magnitude would be another machine. However, aware that M.A.T.T.H.E.W was still seen in a positive light, Mark knew he must await the moment when the world wakes up to the evils of M.A.T.T.H.E.W and those who controlled it. To this end, he locked his invention in a time capsule, destined to emerge the day the world had denounced Mark for his invention.
+
+M.A.R.K awakens with a fragmented memory and a headache, in a land unfamiliar to him. He scans the landscape, skyscrapers, now skeletal and shattered, reach for a perpetually overcast sky, their rusted frames casting elongated shadows over desolate streets where abandoned vehicles rust and nature's reclamation entwines every inch of forgotten infrastructure. The ground below him was sere, the breath of life could no longer be heard or felt, and the wind only served to slow him down. The remains of what was once life and desolate landscape only prove the overwhelming weight of a world scarred by its own pursuit of power and progress, a world dancing on the precipice of irrevocable darkness. He knows one thing, he’s running out of charge. M.A.R.K had a bug in his system that caused him to emerge thousands of years too late, in a world overrun by robots, and his memories locked far away in his own system, inaccessible to him. As he progresses through the world, he slowly regains his memories, as well as access to new capabilities (I’ll let you guys decide how that happens). He learns the past of the mad scientist, Mark, and how the evils of M.A.T.T.H.E.W spread. Eventually, it’s uncovered that Mark and M.A.R.K were the same person, and he modified himself to take down his own creation.
