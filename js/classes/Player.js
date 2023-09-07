@@ -1,4 +1,5 @@
 let debounce = true
+let attackDebounce = true
 let starterPositionX = 50
 let starterPositionY = 100
 
@@ -33,6 +34,8 @@ class Player extends Sprite {
         this.health = 100
         this.collisionBlocks = collisionBlocks
         this.enemies = enemies
+
+        this.attackRange = 50
     }
 
     jumpCheck() {
@@ -53,6 +56,7 @@ class Player extends Sprite {
         else player.wasJumping = true
 
     }
+
     jump() {
         player.velocity.y = player.jumpStrength
     }
@@ -64,13 +68,14 @@ class Player extends Sprite {
     moveRight() {
         player.velocity.x = player.movementSpeed
     }
-    
+
     update() {
         this.movment()
         this.applyGravity()
         this.updateHitbox()
         // c.fillRect(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.width, this.hitbox.height)
         this.checkForVerticalCollision()
+        this.checkForAttack()
         this.checkForEnemy()
     }
 
@@ -84,28 +89,33 @@ class Player extends Sprite {
 
     movment() {
         // this is the blue box
-       // c.fillStyle = 'rgba(0, 0, 255, 0.5)'
-       // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        // c.fillStyle = 'rgba(0, 0, 255, 0.5)'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
         this.position.x += this.velocity.x
         player.velocity.x = player.velocity.x * player.friction
         this.updateHitbox()
         this.checkForHorizontalCollision()
-        this.updateHitbox() 
+        this.updateHitbox()
         player.jumpCheck()
+
         if (keys.d.pressed) {
-                player.moveRight()
-                player.switchSprite('runRight')
-                player.lastDirection = 'right'
+            player.moveRight()
+            if (keys.j.pressed || keys.k.pressed) return
+            player.switchSprite('runRight')
+            player.lastDirection = 'right'
         }
         else if (keys.a.pressed) {
-                player.moveLeft()
-                player.switchSprite('runLeft')
-                player.lastDirection = 'left'
+            player.moveLeft()
+            if (keys.j.pressed || keys.k.pressed) return
+            player.switchSprite('runLeft')
+            player.lastDirection = 'left'
         }
         else {
             if (player.lastDirection === 'left') {
+                if (keys.j.pressed || keys.k.pressed) return
                 player.switchSprite('idleLeft')
             } else {
+                if (keys.j.pressed || keys.k.pressed) return
                 player.switchSprite('idleRight')
             }
         }
@@ -153,6 +163,50 @@ class Player extends Sprite {
         }
     }
 
+    checkForAttack() {
+        for (let i = 0; i < this.enemies.length; i++) {
+            const enemies = this.enemies[i]
+            if (keys.j.pressed && attackDebounce) {
+                if (this.hitbox.position.x - this.attackRange <= enemies.position.x + enemies.width &&
+                    this.hitbox.position.x - this.attackRange + this.hitbox.width >= enemies.position.x &&
+                    this.hitbox.position.y + this.hitbox.height >= enemies.position.y &&
+                    this.hitbox.position.y <= enemies.position.y + enemies.height) {
+                    attackDebounce = false
+                    player.switchSprite('attackLeft')
+                    new playAudio("swbugdies")
+                    console.log("Enemy | ", enemies.health -= 5)
+                    function rest() { attackDebounce = true ; return true }
+                    setTimeout(rest, 500)
+                    
+                }
+            }
+            if (keys.k.pressed && attackDebounce) {
+                if (this.hitbox.position.x + this.attackRange <= enemies.position.x + enemies.width &&
+                    this.hitbox.position.x + this.attackRange + this.hitbox.width >= enemies.position.x &&
+                    this.hitbox.position.y + this.hitbox.height >= enemies.position.y &&
+                    this.hitbox.position.y <= enemies.position.y + enemies.height) {
+                    attackDebounce = false
+                    player.switchSprite('attackRight')
+                    new playAudio("swbugdies")
+                    console.log("Enemy | ", enemies.health -= 5)
+                    function rest() { attackDebounce = true ; return true }
+                    setTimeout(rest, 500)
+
+                }
+            }
+
+            if (enemies.health <= 0) {
+                // console.log("Crawler | Dead")
+                enemies.position.x -= 1000
+                 function rest() {
+                    enemies.health = enemies.starterHealth
+                    enemies.position.x += 1000
+                 }
+                 setTimeout(rest, 5000)
+             }
+        }
+
+    }
 
     checkForEnemy() {
         for (let i = 0; i < this.enemies.length; i++) {
@@ -164,17 +218,17 @@ class Player extends Sprite {
                 // collision on x axis going to the left 
                 if (debounce) {
                     debounce = false
+                    new playAudio("swbugbites")
                     new playAudio("swhurt")
-                    console.log(this.health -= 10)
+                    console.log("Player |", this.health -= 10)
                     if (this.health <= 0) {
                         new playAudio("swdeath")
                         player.position.x = starterPositionX
                         player.position.y = starterPositionY
                         player.health = 100
                     }
-                    function rest() {debounce = true; return true}
+                    function rest() { debounce = true; return true }
                     setTimeout(rest, 500)
-                    debounce = false
                 }
             }
         }

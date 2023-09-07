@@ -41,7 +41,8 @@ Array.prototype.createObjectsFrom2D = function () {
                             loop: true,
                             imageSrc: './img/enemies/GoombaLeft.png'
                         },
-                    }
+                    },
+                    health: 25
                 }))
             }
         })

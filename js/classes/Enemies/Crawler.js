@@ -1,12 +1,13 @@
 class Crawler extends Sprite{
-    constructor({ position, imageSrc, frameRate, animations }) {
+    constructor({ position, imageSrc, frameRate, animations, health }) {
         super({ imageSrc, frameRate, animations })
         this.position = position
         this.walkCycleLength = 32 * 3
         this.movementSpeed = .5
         this.walkCycle = 0
         this.moveL = true
-
+        this.starterHealth = health
+        this.health = this.starterHealth
     }
 
     moveLeft() {
@@ -18,6 +19,10 @@ class Crawler extends Sprite{
     }
 
     update() {
+        this.move()
+    }
+
+    move() {
         if (this.moveL) {
             this.walkCycle += this.movementSpeed
             this.switchSprite('Left')

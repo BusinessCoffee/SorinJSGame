@@ -44,7 +44,19 @@ const player = new Player({
             frameBuffer: 20,
             loop: true,
             imageSrc: './img/player/MarkRunLeft.png'
-        }
+        },
+        attackLeft: {
+            frameRate: 4,
+            frameBuffer: 20,
+            loop: false,
+            imageSrc: './img/player/MarkAttackLeft.png'
+        },
+        attackRight: {
+            frameRate: 4,
+            frameBuffer: 20,
+            loop: false,
+            imageSrc: './img/player/MarkAttackRight.png'
+        },
     }
 })
 
@@ -60,7 +72,13 @@ const keys = {
     },
     r: {
         pressed: false
-    }
+    },
+    j: {
+        pressed: false,
+    },
+    k: {
+        pressed: false
+    },
 }
 
 function animate() {
@@ -70,6 +88,7 @@ function animate() {
     collisionBlocks.forEach((collisionBlock) => {
         collisionBlock.draw()
     })
+
     enemies.forEach((Enemy) => {
         Enemy.draw() 
         Enemy.update()
