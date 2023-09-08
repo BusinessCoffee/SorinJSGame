@@ -35,17 +35,21 @@ class Player extends Sprite {
         this.enemies = enemies
         this.parseCollisions = []
     }
+
     updateLevel(){
         switch (level){
             case 1:
                 this.parseCollisions = collisionLevel.parse2D()
-                player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()
+                player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()[0]
                 break
             case 2:
                 this.parseCollisions = collisionLevel2.parse2D()
-                player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()
+                player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()[0]
+                // console.log(player.collisionBlocks)
                 break
-
+                default:
+                    this.parseCollisions = collisionLevel.parse2D()// level 1
+                    player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()[0]   
         }
     }
     jumpCheck() {
