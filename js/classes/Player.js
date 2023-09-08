@@ -33,25 +33,10 @@ class Player extends Sprite {
         this.health = 100
         this.collisionBlocks = collisionBlocks
         this.enemies = enemies
-        this.parseCollisions = []
+
     }
 
-    updateLevel(){
-        switch (level){
-            case 1:
-                this.parseCollisions = collisionLevel.parse2D()
-                player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()[0]
-                break
-            case 2:
-                this.parseCollisions = collisionLevel2.parse2D()
-                player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()[0]
-                // console.log(player.collisionBlocks)
-                break
-                default:
-                    this.parseCollisions = collisionLevel.parse2D()// level 1
-                    player.collisionBlocks = this.parseCollisions.createObjectsFrom2D()[0]   
-        }
-    }
+
     jumpCheck() {
         if (keys.w.pressed) {
             if (player.velocity.y === 0) {
@@ -72,7 +57,7 @@ class Player extends Sprite {
     }
     jump() {
         level++            
-        this.updateLevel()
+        updateLevel()
         player.velocity.y = player.jumpStrength
     }
 

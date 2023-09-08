@@ -62,6 +62,27 @@ const keys = {
         pressed: false
     }
 }
+function updateLevel(){
+    switch (level){
+        case 1:
+            parseCollisions = collisionLevel.parse2D()
+            enemies = parseCollisions.createObjectsFrom2D()[1]
+            player.enemies = parseCollisions.createObjectsFrom2D()[1]
+            player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]
+            break
+        case 2:
+            parseCollisions = collisionLevel2.parse2D()
+            enemies = parseCollisions.createObjectsFrom2D()[1]
+            player.enemies = parseCollisions.createObjectsFrom2D()[1]
+            player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]
+            // console.log(player.collisionBlocks)
+            break
+        default:
+            parseCollisions = collisionLevel.parse2D()// level 1
+            player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]  
+            break 
+    }
+}
 
 function animate() {
     window.requestAnimationFrame(animate)
