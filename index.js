@@ -66,22 +66,17 @@ function updateLevel(){
     switch (level){
         case 1:
             parseCollisions = collisionLevel.parse2D()
-            enemies = parseCollisions.createObjectsFrom2D()[1]
-            player.enemies = parseCollisions.createObjectsFrom2D()[1]
-            player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]
             break
         case 2:
             parseCollisions = collisionLevel2.parse2D()
-            enemies = parseCollisions.createObjectsFrom2D()[1]
-            player.enemies = parseCollisions.createObjectsFrom2D()[1]
-            player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]
-            // console.log(player.collisionBlocks)
             break
         default:
             parseCollisions = collisionLevel.parse2D()// level 1
-            player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]  
             break 
     }
+    enemies = parseCollisions.createObjectsFrom2D()[1]
+    player.enemies = enemies
+    player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]  
 }
 
 function animate() {
@@ -98,6 +93,13 @@ function animate() {
 
     player.draw()
     player.update()
+    if (player.hitbox.position.x > canvas.width -64){
+        player.position.x = starterPositionX
+        player.position.y = starterPositionY
+        level++
+        console.log(level)
+        updateLevel()
+    }
 }
 
 animate()
