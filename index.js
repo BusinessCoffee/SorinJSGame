@@ -96,6 +96,22 @@ function updateLevel(){
     player.enemies = enemies
     player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]  
 }
+function updateLevel(){
+    switch (level){
+        case 1:
+            parseCollisions = collisionLevel.parse2D()
+            break
+        case 2:
+            parseCollisions = collisionLevel2.parse2D()
+            break
+        default:
+            parseCollisions = collisionLevel.parse2D()// level 1
+            break 
+    }
+    enemies = parseCollisions.createObjectsFrom2D()[1]
+    player.enemies = enemies
+    player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]  
+}
 
 function animate() {
     window.requestAnimationFrame(animate)

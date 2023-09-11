@@ -35,6 +35,7 @@ class Player extends Sprite {
         this.collisionBlocks = collisionBlocks
         this.enemies = enemies
 
+
         this.attackRange = 50
 
     }
