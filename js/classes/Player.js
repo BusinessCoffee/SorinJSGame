@@ -60,8 +60,6 @@ class Player extends Sprite {
     }
 
     jump() {
-        level++            
-        updateLevel()
         player.velocity.y = player.jumpStrength
     }
 
