@@ -7,7 +7,7 @@ var level = 1
 var parseCollisions = collisionLevel.parse2D()
 var [collisionBlocks, enemies] = parseCollisions.createObjectsFrom2D()
 
-const Background = new Sprite({
+var Background = new Sprite({
     position: {
         x: 0,
         y: 0,
@@ -80,38 +80,6 @@ const keys = {
         pressed: false
     },
 }
-function updateLevel(){
-    switch (level){
-        case 1:
-            parseCollisions = collisionLevel.parse2D()
-            break
-        case 2:
-            parseCollisions = collisionLevel2.parse2D()
-            break
-        default:
-            parseCollisions = collisionLevel.parse2D()// level 1
-            break 
-    }
-    enemies = parseCollisions.createObjectsFrom2D()[1]
-    player.enemies = enemies
-    player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]  
-}
-function updateLevel(){
-    switch (level){
-        case 1:
-            parseCollisions = collisionLevel.parse2D()
-            break
-        case 2:
-            parseCollisions = collisionLevel2.parse2D()
-            break
-        default:
-            parseCollisions = collisionLevel.parse2D()// level 1
-            break 
-    }
-    enemies = parseCollisions.createObjectsFrom2D()[1]
-    player.enemies = enemies
-    player.collisionBlocks = parseCollisions.createObjectsFrom2D()[0]  
-}
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -128,11 +96,11 @@ function animate() {
 
     player.draw()
     player.update()
-    if (player.hitbox.position.x > canvas.width -64){
+    if (player.hitbox.position.x > canvas.width -64){//level check
         player.position.x = starterPositionX
         player.position.y = starterPositionY
         level++
-        console.log(level)
+        console.log("level ",level)
         updateLevel()
     }
 }
