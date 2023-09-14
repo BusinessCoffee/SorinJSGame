@@ -16,7 +16,7 @@ var Background = new Sprite({
 })
 
 
-
+var store = new shop({})
 
 
 var player = new Player({
@@ -90,8 +90,7 @@ var overlay = new Overlay({
     score: 0
 })
 
-const shopui = new shop()
-shopui.build()
+
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -109,8 +108,8 @@ function animate() {
 
     player.draw()
     player.update()
-    
     overlay.update()
+    store.build()
 
     /*if (player.hitbox.position.x > canvas.width -64){//level check
         player.position.x = starterPositionX
