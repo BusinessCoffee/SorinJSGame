@@ -215,7 +215,7 @@ class Player extends Sprite {
                     }
                     setTimeout(rest, 5000)
                     this.score += 1
-                    enemies.movementSpeed += (player.score * .5)
+                    enemies.movementSpeed += (player.score * .1)
                 }
             }
         }
@@ -232,6 +232,7 @@ class Player extends Sprite {
                 // collision on x axis going to the left 
                 if (debounce) {
                     debounce = false
+                    this.health -= 10
                     new playAudio("swbugbites")
                     new playAudio("swhurt")
                     if (this.health <= 0) {
