@@ -35,8 +35,11 @@ class Player extends Sprite {
         this.collisionBlocks = collisionBlocks
         this.enemies = enemies
 
+
         this.attackRange = 50
+
     }
+
 
     jumpCheck() {
         if (keys.w.pressed) {
@@ -70,6 +73,7 @@ class Player extends Sprite {
     }
 
     update() {
+        // this.updateLevel()
         this.movment()
         this.applyGravity()
         this.updateHitbox()
@@ -123,6 +127,9 @@ class Player extends Sprite {
             player.health = 100
             player.position.x = starterPositionX
             player.position.y = starterPositionY
+            // level++            
+            // this.updateLevel()
+            console.log(level)
         }
     }
 
