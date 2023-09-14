@@ -81,6 +81,11 @@ const keys = {
     },
 }
 
+var overlay = new Overlay({
+    health: 100,
+    score: 0
+})
+
 function animate() {
     window.requestAnimationFrame(animate)
 
@@ -89,6 +94,7 @@ function animate() {
         collisionBlock.draw()
     })
 
+
     enemies.forEach((Enemy) => {
         Enemy.draw() 
         Enemy.update()
@@ -96,13 +102,15 @@ function animate() {
 
     player.draw()
     player.update()
-    if (player.hitbox.position.x > canvas.width -64){//level check
+    
+    overlay.update()
+
+    /*if (player.hitbox.position.x > canvas.width -64){//level check
         player.position.x = starterPositionX
         player.position.y = starterPositionY
-        level++
         console.log("level ",level)
         updateLevel()
-    }
+    }*/
 }
 
 animate()

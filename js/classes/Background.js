@@ -1,4 +1,4 @@
-function updateLevel(){
+function updateLevel(level){
     switch (level){
         case 1:
             parseCollisions = collisionLevel.parse2D()
