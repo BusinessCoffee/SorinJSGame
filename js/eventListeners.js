@@ -10,6 +10,15 @@ window.addEventListener('keydown', (event) => {
     case 'd':
         keys.d.pressed = true
         break
+    case 'r':
+        keys.r.pressed = true
+        break
+    case 'j':
+        keys.j.pressed = true
+        break
+    case 'k':
+        keys.k.pressed = true
+        break
     }
 
 })
@@ -25,6 +34,14 @@ window.addEventListener('keyup', (event) => {
     case 'd':
         keys.d.pressed = false
         break
+    case 'r':
+        keys.r.pressed = false
+        break
+    case 'j':
+        keys.j.pressed = false
+        break
+    case 'k':
+        keys.k.pressed = false
+        break
     }
-
 })
