@@ -17,6 +17,8 @@ const Background = new Sprite({
     imageSrc: './img/testmap.png'
 })
 
+
+
 const player = new Player({
     collisionBlocks,
 })
@@ -32,6 +34,9 @@ const keys = {
         pressed: false,
     },
 }
+
+const shopui = new shop()
+shopui.build()
 
 function animate() {
     window.requestAnimationFrame(animate)
