@@ -1,5 +1,6 @@
 let debounce = true
 let attackDebounce = true
+let updateDebounce = true
 let starterPositionX = 50
 let starterPositionY = 100
 
@@ -37,6 +38,7 @@ class Player extends Sprite {
 
 
         this.attackRange = 50
+        this.score = 0
 
     }
 
@@ -81,6 +83,7 @@ class Player extends Sprite {
         this.checkForVerticalCollision()
         this.checkForAttack()
         this.checkForEnemy()
+        this.checkForScore()
     }
 
     switchSprite(name) {
@@ -182,9 +185,9 @@ class Player extends Sprite {
                     player.switchSprite('attackLeft')
                     new playAudio("swbugdies")
                     console.log("Enemy | ", enemies.health -= 5)
-                    function rest() { attackDebounce = true ; return true }
+                    function rest() { attackDebounce = true; return true }
                     setTimeout(rest, 500)
-                    
+
                 }
             }
             if (keys.k.pressed && attackDebounce) {
@@ -196,7 +199,7 @@ class Player extends Sprite {
                     player.switchSprite('attackRight')
                     new playAudio("swbugdies")
                     console.log("Enemy | ", enemies.health -= 5)
-                    function rest() { attackDebounce = true ; return true }
+                    function rest() { attackDebounce = true; return true }
                     setTimeout(rest, 500)
 
                 }
@@ -204,13 +207,19 @@ class Player extends Sprite {
 
             if (enemies.health <= 0) {
                 // console.log("Crawler | Dead")
-                enemies.position.x -= 1000
-                 function rest() {
-                    enemies.health = enemies.starterHealth
-                    enemies.position.x += 1000
-                 }
-                 setTimeout(rest, 5000)
-             }
+                if (updateDebounce) {
+                    updateDebounce = false
+                    enemies.position.x -= 1000
+                    function rest() {
+                        enemies.health = enemies.starterHealth
+                        enemies.position.x += 1000
+                        updateDebounce = true
+                    }
+                    setTimeout(rest, 5000)
+                    this.score += 1
+                    console.log('Score | ', this.score)
+                }
+            }
         }
 
     }
@@ -233,6 +242,14 @@ class Player extends Sprite {
                         player.position.x = starterPositionX
                         player.position.y = starterPositionY
                         player.health = 100
+                        
+                        if (this.score > localStorage.getItem("dataa")) {
+                            localStorage.setItem("data", this.score)
+                        }
+
+                        this.score = 0
+                        level = 1
+                        updateLevel(level)
                     }
                     function rest() { debounce = true; return true }
                     setTimeout(rest, 500)
@@ -270,6 +287,17 @@ class Player extends Sprite {
                     break
                 }
             }
+        }
+    }
+
+    checkForScore() {
+        if (this.score >= 10 && level === 1) {
+            level = 2
+            updateLevel(level)
+            console.log('Level 2 | Initated')
+            player.position.x = starterPositionX
+            player.position.y = starterPositionY
+            player.health = 100
         }
     }
 }
