@@ -23,37 +23,37 @@ var player = new Player({
     animations: {
         idleRight: {
             frameRate: 4,
-            frameBuffer: 10,
+            frameBuffer: 5,
             loop: true,
             imageSrc: './img/player/MarkIdleRight.png'
         },
         idleLeft: {
             frameRate: 4,
-            frameBuffer: 10,
+            frameBuffer: 5,
             loop: true,
             imageSrc: './img/player/MarkIdleLeft.png'
         },
         runRight: {
             frameRate: 4,
-            frameBuffer: 20,
+            frameBuffer: 10,
             loop: true,
             imageSrc: './img/player/MarkRunRight.png'
         },
         runLeft: {
             frameRate: 4,
-            frameBuffer: 20,
+            frameBuffer: 10,
             loop: true,
             imageSrc: './img/player/MarkRunLeft.png'
         },
         attackLeft: {
             frameRate: 4,
-            frameBuffer: 20,
+            frameBuffer: 10,
             loop: false,
             imageSrc: './img/player/MarkAttackLeft.png'
         },
         attackRight: {
             frameRate: 4,
-            frameBuffer: 20,
+            frameBuffer: 10,
             loop: false,
             imageSrc: './img/player/MarkAttackRight.png'
         },
@@ -86,8 +86,8 @@ var overlay = new Overlay({
     score: 0
 })
 
-function animate() {
-    window.requestAnimationFrame(animate)
+setInterval(function () {
+    //window.requestAnimationFrame(animate)
 
     Background.draw()
     collisionBlocks.forEach((collisionBlock) => {
@@ -96,13 +96,13 @@ function animate() {
 
 
     enemies.forEach((Enemy) => {
-        Enemy.draw() 
+        Enemy.draw()
         Enemy.update()
     })
 
     player.draw()
     player.update()
-    
+
     overlay.update()
 
     /*if (player.hitbox.position.x > canvas.width -64){//level check
@@ -111,6 +111,4 @@ function animate() {
         console.log("level ",level)
         updateLevel()
     }*/
-}
-
-animate()
+}, 1000 / 60);
