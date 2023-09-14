@@ -4,38 +4,37 @@ class shop {
     
     
     build() {
-        const canvas = document.createElement('canvas')
-        canvas.width = 1000
-        canvas.height = 1000
-        const  ctx = canvas.getContext('2d')
         
-        const baton = new Image()
-        baton.src = 'image/icon/baton.png'
-        const knife = new Image()
-        knife.src = 'image/icon/knife.png'
-        const sword = new Image()
-        sword.src = 'image/icon/sword.png'
-        const photon = new Image()
-        photon.src = 'image/icon/photon.png'
-        const crossbow = new Image()
-        crossbow.src = 'image/icon/crossbow.png'
-        const revolver = new Image()
-        revolver.src = 'image/icon/revolver.png'
-        const pistol = new Image()
-        pistol.src = 'image/icon/pistol.png'
-        const rifle = new Image()
-        rifle.src = 'image/icon/rifle.png'
 
-            
-            ctx.drawImage(baton, 50, 50)
-            ctx.drawImage(knife, 50, 150)
-            ctx.drawImage(sword, 50, 250)
-            ctx.drawImage(photon, 50, 350)
-            ctx.drawImage(crossbow, 150, 50)
-            ctx.drawImage(revolver, 150, 150)
-            ctx.drawImage(pistol, 150, 250)
-            ctx.drawImage(rifle, 150, 350)
+        const baton = new Image()
+        baton.src = './img/icon/baton.png'
+        const knife = new Image()
+        knife.src = './img/icon/knife.png'
+        const sword = new Image()
+        sword.src = './img/icon/sword.png'
+        const photon = new Image()
+        photon.src = './img/icon/photon.png'
+        const crossbow = new Image()
+        crossbow.src = './img/icon/crossbow.png'
+        const revolver = new Image()
+        revolver.src = './img/icon/revolver.png'
+        const pistol = new Image()
+        pistol.src = './img/icon/pistol.png'
+        const rifle = new Image()
+        rifle.src = './img/icon/rifle.png'
         
+            
+        rifle.onload = () => {
+            console.log("howdy sir")
+            c.drawImage(baton, 700, 700, 50,50)
+            c.drawImage(knife, 50, 150, 50,50)
+            c.drawImage(sword, 50, 250, 50,50)
+            c.drawImage(photon, 50, 350, 50,50)
+            c.drawImage(crossbow, 150, 50, 50,50)
+            c.drawImage(revolver, 150, 150, 50,50)
+            c.drawImage(pistol, 150, 250, 50,50)
+            c.drawImage(rifle, 150, 350, 50,50)
+        }
 
         
         
@@ -68,7 +67,6 @@ class shop {
                 if (x >= 350 && x <= 400 && y >= 150 && y <= 200) {
                     alert('give rifle')
                 }
-            document.body.appendChild(canvas)
         })
         
         
