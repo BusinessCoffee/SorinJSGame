@@ -2,7 +2,7 @@ const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
 canvas.width = 64 * 16 // 1024
-canvas.height = 64 * 9  // 576
+canvas.height = 64 * 16  // 576
 var level = 1
 var parseCollisions = collisionLevel.parse2D()
 var [collisionBlocks, enemies] = parseCollisions.createObjectsFrom2D()
@@ -14,6 +14,11 @@ var Background = new Sprite({
     },
     imageSrc: './img/maps/Level1.png'
 })
+
+
+var store = new shop({})
+store.button()
+
 
 var player = new Player({
     collisionBlocks,
@@ -86,6 +91,8 @@ var overlay = new Overlay({
     score: 0
 })
 
+
+
 setInterval(function () {
     //window.requestAnimationFrame(animate)
 
@@ -104,6 +111,7 @@ setInterval(function () {
     player.update()
 
     overlay.update()
+    store.build()
 
     /*if (player.hitbox.position.x > canvas.width -64){//level check
         player.position.x = starterPositionX
