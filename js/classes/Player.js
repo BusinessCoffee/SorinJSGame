@@ -241,7 +241,7 @@ class Player extends Sprite {
                         player.position.y = starterPositionY
                         player.health = 100
                         
-                        if (this.score > localStorage.getItem("dataa")) {
+                        if (this.score > localStorage.getItem("data")) {
                             localStorage.setItem("data", this.score)
                         }
 
