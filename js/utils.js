@@ -31,13 +31,13 @@ Array.prototype.createObjectsFrom2D = function () {
                     animations: {
                         Right: {
                             frameRate: 5,
-                            frameBuffer: 10,
+                            frameBuffer: 5,
                             loop: true,
                             imageSrc: './img/enemies/GoombaRight.png'
                         },
                         Left: {
                             frameRate: 5,
-                            frameBuffer: 10,
+                            frameBuffer: 5,
                             loop: true,
                             imageSrc: './img/enemies/GoombaLeft.png'
                         },

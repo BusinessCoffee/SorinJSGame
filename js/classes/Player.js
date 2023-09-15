@@ -21,11 +21,11 @@ class Player extends Sprite {
         this.sides = {
             bottom: this.position.y + this.height
         }
-        this.gravity = .3
-        this.friction = .7
+        this.gravity = .6
+        this.friction = .35
 
-        this.jumpStrength = -7.8
-        this.movementSpeed = 2.5
+        this.jumpStrength = -11
+        this.movementSpeed = 5
         this.jumpLimit = 2
         this.ceilingClimbing = false
 
@@ -132,7 +132,6 @@ class Player extends Sprite {
             player.position.y = starterPositionY
             // level++            
             // this.updateLevel()
-            console.log(level)
         }
     }
 
@@ -182,9 +181,9 @@ class Player extends Sprite {
                     this.hitbox.position.y + this.hitbox.height >= enemies.position.y &&
                     this.hitbox.position.y <= enemies.position.y + enemies.height) {
                     attackDebounce = false
+                    enemies.health -= 5
                     player.switchSprite('attackLeft')
                     new playAudio("swbugdies")
-                    console.log("Enemy | ", enemies.health -= 5)
                     function rest() { attackDebounce = true; return true }
                     setTimeout(rest, 500)
 
@@ -196,9 +195,9 @@ class Player extends Sprite {
                     this.hitbox.position.y + this.hitbox.height >= enemies.position.y &&
                     this.hitbox.position.y <= enemies.position.y + enemies.height) {
                     attackDebounce = false
+                    enemies.health -= 5
                     player.switchSprite('attackRight')
                     new playAudio("swbugdies")
-                    console.log("Enemy | ", enemies.health -= 5)
                     function rest() { attackDebounce = true; return true }
                     setTimeout(rest, 500)
 
@@ -206,7 +205,6 @@ class Player extends Sprite {
             }
 
             if (enemies.health <= 0) {
-                // console.log("Crawler | Dead")
                 if (updateDebounce) {
                     updateDebounce = false
                     enemies.position.x -= 1000
@@ -217,7 +215,7 @@ class Player extends Sprite {
                     }
                     setTimeout(rest, 5000)
                     this.score += 1
-                    console.log('Score | ', this.score)
+                    enemies.movementSpeed += (player.score * .1)
                 }
             }
         }
@@ -234,9 +232,9 @@ class Player extends Sprite {
                 // collision on x axis going to the left 
                 if (debounce) {
                     debounce = false
+                    this.health -= 10
                     new playAudio("swbugbites")
                     new playAudio("swhurt")
-                    console.log("Player |", this.health -= 10)
                     if (this.health <= 0) {
                         new playAudio("swdeath")
                         player.position.x = starterPositionX
@@ -294,7 +292,6 @@ class Player extends Sprite {
         if (this.score >= 10 && level === 1) {
             level = 2
             updateLevel(level)
-            console.log('Level 2 | Initated')
             player.position.x = starterPositionX
             player.position.y = starterPositionY
             player.health = 100

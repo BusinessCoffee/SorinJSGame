@@ -3,7 +3,7 @@ class Crawler extends Sprite{
         super({ imageSrc, frameRate, animations })
         this.position = position
         this.walkCycleLength = 32 * 3
-        this.movementSpeed = .5
+        this.movementSpeed = 1
         this.walkCycle = 0
         this.moveL = true
         this.starterHealth = health
