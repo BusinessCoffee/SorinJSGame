@@ -13,7 +13,7 @@ class Overlay {
         document.body.style.fontSize = "150%"
 
         this.overlay.style.marginLeft = "1000px"
-        this.overlay.style.marginTop = "-600px"
+        this.overlay.style.marginTop = "-1050px"
 
         this.healthText = document.createElement("h5")
         this.healthText.innerHTML = "Health | " + this.health
